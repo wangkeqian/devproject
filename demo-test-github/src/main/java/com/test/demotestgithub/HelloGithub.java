@@ -7,4 +7,7 @@ package com.test.demotestgithub;
  * @date 2019/11/23
  */
 public class HelloGithub {
+    public static void main(String[] args) {
+        System.out.println("hhh  github");
+    }
 }
