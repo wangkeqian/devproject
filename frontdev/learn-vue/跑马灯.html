@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" @click='hai ' value="嗨起来" >
+        <input type="button" value="稳住" @click='stop'>
+        <h4>{{msg}}</h4>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            msg: '猥琐别浪，稳住能赢~',
+            intervalId:null
+             
+        },methods: {
+            hai(){ 
+
+                if (this.intervalId!=null) {
+                    return; 
+                }
+                this.intervalId =  setInterval(() => {
+                    this.msg =this.msg.substring(1)+this.msg.substr(0,1);       
+                }, 300);   
+            },
+            stop(){
+
+                clearInterval(this.intervalId);
+                this.intervalId = null;
+            }
+        },
+
+    })
+</script>
+</html>
