@@ -10,6 +10,25 @@
 </head>
 <body>
     <div id ="app"> 
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    Id:
+                    <input type="text" class="form-control" v-model='id'>
+                </label>
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model='name'>
+                </label>
+                <input type="button" value="添加" name="" class="btn btn-primary" @click="add" id="">
+                
+            </div>
+        </div>
+
+
         <table class="table table-bordered table-hover table-striped">
             <thead>
                 <th>Id</th>
@@ -18,10 +37,11 @@
                 <th>Operation</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-
-                    </td>
+                <tr v-for="item in list" :key='item.id'>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.CTime}}</td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
             </tbody>
         </table>
@@ -31,6 +51,8 @@
      var vm = new Vue({
         el: '#app',
         data: {
+            id:'',
+            name:'',
             list: [
                 {id:1, name:'奔驰', CTime: new Date() },
                 {id:2, name:'宝马', CTime: new Date() },
@@ -38,7 +60,28 @@
                 {id:4, name:'法拉利', CTime: new Date() },
             ]
         },
-        methods: {}
+        methods: {
+            add(){
+                var car = {id:this.id, name:this.name, CTime:new Date()};
+                this.list.push(car);
+            },
+            del(id){
+                // this.list.some((item,i)=>{
+                //     //some方法 array.some(function(currentValue,index,arr),thisValue)
+                //     if(id==item.id){
+                //         this.list.splice(i,1);
+                //         return true;
+                //     }
+                // })
+                var index = this.list.findIndex(item=>{
+                    if(item.id==id){
+                        console.log(id)
+                        return true;
+                    }
+                });
+                this.list.splice(index,1);
+            }
+        }
      });
 </script>
 </html>
