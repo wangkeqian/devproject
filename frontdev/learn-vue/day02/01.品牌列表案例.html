@@ -18,13 +18,16 @@
                 <label>
                     Id:
                     <input type="text" class="form-control" v-model='id'>
-                </label>
+                </label> 
                 <label>
                     Name:
                     <input type="text" class="form-control" v-model='name'>
                 </label>
                 <input type="button" value="添加" name="" class="btn btn-primary" @click="add" id="">
-                
+                <label>
+                    搜索名称关键字:
+                    <input type="text" class="form-control"  v-model='keywords'>
+                </label>
             </div>
         </div>
 
@@ -37,10 +40,10 @@
                 <th>Operation</th>
             </thead>
             <tbody>
-                <tr v-for="item in list" :key='item.id'>
+                <tr v-for="item in search(keywords)" :key='item.id'>
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.CTime}}</td>
+                    <td>{{item.CTime | dateFormat()}}</td>
                     <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
             </tbody>
@@ -48,40 +51,72 @@
     </div>
 </body>
 <script>
-     var vm = new Vue({
-        el: '#app',
-        data: {
-            id:'',
-            name:'',
-            list: [
-                {id:1, name:'奔驰', CTime: new Date() },
-                {id:2, name:'宝马', CTime: new Date() },
-                {id:3, name:'凯迪拉克', CTime: new Date() },
-                {id:4, name:'法拉利', CTime: new Date() },
-            ]
+    Vue.filter("dateFormat",function(dateStr){
+        let df = new Date(dateStr);
+        let year = df.getFullYear();
+        let month = df.getMonth()+1;
+        let day = df.getDate();
+        let hours = df.getHours();
+        let minuter = df.getMinutes();
+        let second = df.getSeconds();
+        //return year+'-'+month+'-'+day;
+        return `${year}-${month}-${day}  ${hours}:${minuter}:${second}`
+    })
+
+    var vm = new Vue({
+    el: '#app',
+    data: {
+        id:'',
+        name:'',
+        keywords:'',
+        list: [
+            {id:1, name:'奔驰', CTime: new Date() },
+            {id:2, name:'宝马', CTime: new Date() },
+            {id:3, name:'凯迪拉克', CTime: new Date() },
+            {id:4, name:'法拉利', CTime: new Date() },
+            {id:5, name:'野马', CTime: new Date() },
+            {id:6, name:'奥迪', CTime: new Date() },
+            {id:7, name:'奔牛', CTime: new Date() },
+        ]
+    },
+    methods: {
+        add(){
+            var car = {id:this.id, name:this.name, CTime:new Date()};
+            this.list.push(car);
+            this.id = this.name = '';
         },
-        methods: {
-            add(){
-                var car = {id:this.id, name:this.name, CTime:new Date()};
-                this.list.push(car);
-            },
-            del(id){
-                // this.list.some((item,i)=>{
-                //     //some方法 array.some(function(currentValue,index,arr),thisValue)
-                //     if(id==item.id){
-                //         this.list.splice(i,1);
-                //         return true;
-                //     }
-                // })
-                var index = this.list.findIndex(item=>{
-                    if(item.id==id){
-                        console.log(id)
-                        return true;
-                    }
-                });
-                this.list.splice(index,1);
-            }
+        del(id){
+            // this.list.some((item,i)=>{
+            //     //some方法 array.some(function(currentValue,index,arr),thisValue)
+            //     if(id==item.id){
+            //         this.list.splice(i,1);
+            //         return true;
+            //     }
+            // })
+            var index = this.list.findIndex(item=>{
+                if(item.id==id){
+                    console.log(id)
+                    return true;
+                }
+            });
+            this.list.splice(index,1);
+        },
+        search(keywords){
+            // var newList = [];
+            // this.list.forEach(element => {
+            //     if(element.name.indexOf(keywords) != -1){
+            //         newList.push(element);
+            //     }
+            // });
+            // return newList;
+            //-----------
+            return this.list.filter(item =>{
+                if(item.name.includes(keywords)){
+                    return item;
+                }
+            })
         }
-     });
+    }
+    });
 </script>
 </html>
