@@ -176,7 +176,7 @@ public final class RedisUtil {
      * @param map
      * @return
      */
-    public boolean hmset(String key, Map<Object, Object> map){
+    public boolean hmset(String key, Map<String, ? extends Object> map){
         try {
             redisTemplate.opsForHash().putAll(key, map);
             return true;
@@ -185,6 +185,7 @@ public final class RedisUtil {
             return false;
         }
     }
+
 
     /**
      * hastset 并设置期限
