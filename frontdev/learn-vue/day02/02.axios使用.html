@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../lib/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id ="app">
+        <input type="button" value="get请求" @click="getInfo">
+        <input type="button" value="post请求" @click="postInfo">
+    </div>
+</body>
+<script>
+     var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {
+            getInfo(){
+                axios.get('http://www.liulongbin.top:3005/api/getprodlist')
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.error(err); 
+                })
+            },
+            postInfo(){
+                axios.post('http://www.liulongbin.top:3005/api/getprodlist')
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.error(err); 
+                })
+            }
+        }
+     });
+</script>
+</html>

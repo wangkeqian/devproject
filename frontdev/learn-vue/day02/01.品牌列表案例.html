@@ -21,12 +21,12 @@
                 </label> 
                 <label>
                     Name:
-                    <input type="text" class="form-control" v-model='name'>
+                    <input type="text" class="form-control" v-model='name' @keyup.enter="add">
                 </label>
                 <input type="button" value="添加" name="" class="btn btn-primary" @click="add" id="">
                 <label>
                     搜索名称关键字:
-                    <input type="text" class="form-control"  v-model='keywords'>
+                    <input type="text" class="form-control"  v-model='keywords' v-focus>
                 </label>
             </div>
         </div>
@@ -51,6 +51,19 @@
     </div>
 </body>
 <script>
+    Vue.directive('focus', {
+        bind:function(el){
+            
+        },
+        inserted:function(el){
+            el.focus();
+        },
+        update:function(el){
+            
+        }
+    })
+
+    //过滤器
     Vue.filter("dateFormat",function(dateStr){
         let df = new Date(dateStr);
         let year = df.getFullYear();
@@ -58,7 +71,7 @@
         let day = df.getDate();
         let hours = df.getHours();
         let minuter = df.getMinutes();
-        let second = df.getSeconds();
+        let second = df.getSeconds().toString().padStart(2,'0');
         //return year+'-'+month+'-'+day;
         return `${year}-${month}-${day}  ${hours}:${minuter}:${second}`
     })
