@@ -1,0 +1,35 @@
+server:
+  port: 8080
+spring:
+  redis:
+    database: 0
+    host: 172.18.9.173
+    port: 6379
+    timeout: 1000
+    password: 123456
+    jedis:
+      pool:
+        max-wait: -1
+        max-active: 22
+        min-idle: 0
+  datasource:
+    username: root
+    password: WKQ!123!wkq
+    url: jdbc:mysql://172.18.9.173:3306/community?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.example.entity
+
+github:
+  client:
+    id: Iv1.867c6edd26016e9e
+    secret: a245010f946518828d2fcbbfaa0afee277706434
+    redirect_url: http://112.74.161.190:8080/callback
+    address: 112.74.161.190
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

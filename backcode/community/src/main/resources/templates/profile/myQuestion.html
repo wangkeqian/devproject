@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的问题</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link charset="utf-8" type="text/css" rel="stylesheet" href="/css/community.css">
+</head>
+
+<body>
+<div class="common-head">
+    <div id="head" th:include="publicTemplates/head :: common_head"></div>
+</div>
+<div class="container-fluid profile">
+    <div class="row main" >
+        <div class="col-lg-9 col-md-12 col-sm-12">
+            <h3><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span th:text="${title}"></span></h3>
+            <hr>
+            <th:block th:each="item,index: ${pageInfo.getList()}">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-rounded" src="https://www.gravatar.com/avatar/6abecf8b42abe112614d1747f7bd15a5?d=identicon&s=50" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading" th:text="${item.getTitle()}" ></h4>
+                        <span th:text="${item.getDesc()}+'......'"></span><br>
+                        <span class="question-count" th:text="${item.getCommentCount()}+'个回复·'+${item.getViewCount()}+'次浏览·'+${#dates.format(item.getGmtCreate(),'MM-dd-yyyy')}"></span>
+                    </div>
+                </div>
+            </th:block>
+            <nav aria-label="Page navigation" >
+                <ul class="pagination">
+                    <li>
+                        <a th:href="@{'/page/1/'+${pageInfo.getPageSize()}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/page/'+${pageInfo.getPrePage()}+'/'+${pageInfo.getPageSize()}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <th:block th:each="i:${#numbers.sequence(1, pageInfo.getPages())}">
+                        <li  th:class="${pageInfo.getPageNum() == i ? 'active':''}" ><a th:href="@{'/page/'+${i}+'/'+${pageInfo.getPageSize()}}" th:text="${i}"></a></li>
+                    </th:block>
+                    <li>
+                        <a th:href="@{'/page/'+${pageInfo.getNextPage()}+'/'+${pageInfo.getPageSize()}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12" >
+            <div class="list-group section">
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/myQuestion'}" class="list-group-item active">
+                    <span class="badge">14</span>
+                    我的问题
+                </a>
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/replies'}" class="list-group-item">
+                    最新回复
+                </a>
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/roughNotBook'}" class="list-group-item">
+                    我的草稿
+                </a>
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/replies'}" class="list-group-item">
+                    <span class="badge">14</span>
+                    我的收藏
+                </a>
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/focusQuestion'}" class="list-group-item">我关注的问题</a>
+                <a th:href="@{'http://'+${session.address}+':8080/profile/deal/focusTopic'}" class="list-group-item">我关注的话题</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

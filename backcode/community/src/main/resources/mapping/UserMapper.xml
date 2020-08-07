@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianma.community.mapper.UserMapper">
+
+    <select id="getById" resultType="com.qianma.community.Model.User">
+        select * from t_cmt_user where id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.qianma.community.Model.User">
+        insert into t_cmt_user(
+        fid,
+        fgmt_create,
+        fgmt_modified,
+        fdesc,
+        fstatus,
+        ftoken,
+        fname,
+        fclient_id,
+        favatar_url)
+        value (
+        #{id},
+        #{gmtCreate},
+        #{gmtModified},
+        #{desc},
+        #{status},
+        #{token},
+        #{name},
+        #{clientId},
+        #{avatarUrl}
+        )
+    </insert>
+</mapper>

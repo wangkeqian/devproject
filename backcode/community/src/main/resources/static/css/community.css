@@ -1,0 +1,43 @@
+.main{
+    margin: 70px;
+    background-color: white;
+}
+body{
+    background-color: #efefef;
+}
+.btn-success{
+    float: right;
+}
+.img-rounded{
+    width: 45px;
+    height: 45px;
+}
+.question-count{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.media-heading{
+    color: #499ef3;
+    font-size: 18px;
+    font-family: "STKaiti";
+}
+.pagination{
+    float: right;
+}
+.profile .section{
+    margin-top: 15px;
+}
+.community-menu{
+    font-size: 13px;
+    color: #999;
+}
+.question-heading{
+    margin-top: 30px;
+}
+.question-heading-right{
+    margin-top: 40px;
+}
+.jumbotron{
+    margin: 50px;
+}

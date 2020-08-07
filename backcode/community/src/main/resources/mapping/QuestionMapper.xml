@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianma.community.mapper.QuestionMapper">
+
+    <select id="getById" resultType="com.qianma.community.Model.Question">
+        select
+        *
+        from t_cmt_question where id = #{id}
+    </select>
+    <insert id="insert"  parameterType="com.qianma.community.Model.Question">
+        insert into t_cmt_question(
+        fid,
+        fgmt_create,
+        fgmt_modified,
+        fkcreatorid,
+        ftitle,
+        fdescription,
+        ftags,
+        fcomment_count,
+        flike_count,
+        fview_count)
+        value (
+        #{id},
+        #{gmtCreate},
+        #{gmtModified},
+        #{creator},
+        #{title},
+        #{desc},
+        #{tags},
+        #{commentCount},
+        #{likeCount},
+        #{viewCount}
+        )
+    </insert>
+    <select id="selectForIndex" resultType="com.qianma.community.dto.QueUsrDTO">
+    select
+        tcq.fid id,
+        tcq.fgmt_create gmtCreate,
+        tcq.fgmt_modified gmtModified,
+        tcq.fkcreatorid "creator",
+        tcq.fdescription "desc",
+        tcq.ftitle title,
+        tcq.ftags tags,
+        tcq.fview_count viewCount,
+        tcq.flike_count likeCount,
+        tcq.fcomment_count commentCount,
+        tcu.fid "user.id",
+        tcu.fgmt_create "user.gmtCearte",
+        tcu.fgmt_modified "user.gmtModified",
+        tcu.fdesc "user.desc",
+        tcu.fstatus "user.status",
+        tcu.ftoken "user.token",
+        tcu.fname "user.name",
+        tcu.fclient_id "user.clientId",
+        tcu.favatar_url "user.avatarUrl"
+     from t_cmt_question tcq
+     join t_cmt_user tcu on tcq.fkcreatorid = tcu.fid
+     order by tcq.fgmt_create desc
+    </select>
+    <select id="getQueUsrById" resultType="com.qianma.community.dto.QueUsrDTO">
+    select
+        tcq.fid id,
+        tcq.fgmt_create gmtCearte,
+        tcq.fgmt_modified gmtModified,
+        tcq.fkcreatorid "creator",
+        tcq.fdescription "desc",
+        tcq.ftitle title,
+        tcq.ftags tags,
+        tcq.fview_count viewCount,
+        tcq.flike_count likeCount,
+        tcq.fcomment_count commentCount,
+        tcu.fid "user.id",
+        tcu.fgmt_create "user.gmtCearte",
+        tcu.fgmt_modified "user.gmtModified",
+        tcu.fdesc "user.desc",
+        tcu.fstatus "user.status",
+        tcu.ftoken "user.token",
+        tcu.fname "user.name",
+        tcu.fclient_id "user.clientId",
+        tcu.favatar_url "user.avatarUrl"
+     from t_cmt_question tcq
+     join t_cmt_user tcu on tcq.fkcreatorid = tcu.fid
+     where tcq.fid = #{id}
+    </select>
+    <update id="update" parameterType="com.qianma.community.Model.Question">
+    update t_cmt_question
+    <set>
+        ftitle = #{title},
+        fdescription = #{desc},
+        fgmt_modified = now(),
+        ftags = #{tags}
+    </set>
+    where fid = #{id}
+    </update>
+</mapper>

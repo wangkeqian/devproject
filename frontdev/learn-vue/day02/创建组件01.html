@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id ="app">
+            <mycom1></mycom1>
+     </div>
+</body>
+<script>
+     var vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {}
+     });
+     let com1 =Vue.extend({
+         template: '<h3>这是王克千的组件，用一下</h3>'
+     })
+     Vue.component('mycom1',com1)
+</script>
+</html>
