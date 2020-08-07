@@ -30,14 +30,14 @@
           <th>Operation</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for='item in list' :key='item.id'>
-          <td>{{item.id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.Ctime | dateFormat()}}</td>
-          <td>{{item.desc}}</td>
-          <td><a href="" @click.prevent="del(item.id)">删除</a></td>
-        </tr>
+      <tbody is="transition-group"  appear>
+            <tr v-for='item in list' :key='item.id'>
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.Ctime | dateFormat()}}</td>
+                <td>{{item.desc}}</td>
+                <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+            </tr> 
       </tbody>
     </table>
     
@@ -122,5 +122,18 @@ export default {//过滤器
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .v-enter,
+  .v-leave-to{
+    opacity: 0;
+    transform: translateY(220px);
+  }
+  .v-enter-active,
+  .v-enter-active-leave-active{
+    transition: all 1s ease;
+  }
+  td:hover{
+            background-color: #1dc5a3;
+            transition: all 1s ease;
+        }
 </style>
+
