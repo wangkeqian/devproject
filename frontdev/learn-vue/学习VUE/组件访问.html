@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id ="app">
+    <cpn1 ref='abc'></cpn1>
+    <button @click='btnClick' >点击</button>
+  </div>
+  <template id="cpn1">
+    <div>
+      <p>it's chlid-module</p>
+    </div>
+  </template>
+</body>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {
+      btnClick(){
+        // this.$children[0].showMsg()
+        // console.log(this.$children[0].name);
+        console.log(this.$refs.abc.name);
+        
+      }
+    },
+    components: {
+      cpn1: {
+        template : '#cpn1',
+        data(){
+          return{
+            name : "i am child template's name"
+          }
+          
+        },
+        methods: {
+          showMsg(){
+            console.log("it's cpn1 chlidTemplate")
+          }
+        }
+      }
+    }
+  });
+</script>
+</html>

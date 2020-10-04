@@ -16,5 +16,6 @@ public class Car {
     private String name;
     private String desc;
     private Date createDate;
-
+    private Double price;
+    private int purchaseQuantity;
 }

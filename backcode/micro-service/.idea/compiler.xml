@@ -6,26 +6,35 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="consumer" />
-        <module name="register-service" />
         <module name="config-server" />
+        <module name="register-service" />
+        <module name="zuul-server" />
         <module name="producer" />
+        <module name="consumer-second" />
+        <module name="config-client" />
+        <module name="consumer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="config-client" target="1.8" />
       <module name="config-server" target="1.8" />
       <module name="consumer" target="1.8" />
+      <module name="consumer-second" target="1.8" />
       <module name="micro-service" target="1.8" />
       <module name="producer" target="1.8" />
       <module name="register-service" target="1.8" />
+      <module name="zuul-server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="config-client" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="consumer" options="-parameters" />
+      <module name="consumer-second" options="-parameters" />
       <module name="producer" options="-parameters" />
       <module name="register-service" options="-parameters" />
+      <module name="zuul-server" options="-parameters" />
     </option>
   </component>
 </project>

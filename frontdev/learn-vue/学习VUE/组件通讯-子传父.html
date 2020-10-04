@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id ="app">
+    <cpn1 @btnclick="cpn1Click"></cpn1>
+  </div>
+  <template id='cpn1'>
+    <div>
+      <button v-for="category in categories" @click='btnClick(category.id)'>
+        {{category.name}}
+      </button>
+    </div>
+  </template>
+</body>
+<script>
+  //children template
+  const cpn1 = {
+    template: '#cpn1',
+    data(){
+      return {
+        categories: [
+          {id:'1',name:'手机数码'},
+          {id:'2',name:'计生情趣'},
+          {id:'3',name:'书籍著作'},
+          {id:'4',name:'电脑办公'}
+        ]
+      }
+    },
+    methods: {
+      btnClick(elm){
+        this.$emit('btnclick',elm)
+      }
+    }
+  }
+  //parent template
+  let vm = new Vue({
+    el: '#app',
+    data: {
+
+    },
+    methods: {
+      cpn1Click(event){
+        console.log("parent"+event)
+      }
+    },
+    components: {
+      cpn1
+    }
+  });
+</script>
+</html>

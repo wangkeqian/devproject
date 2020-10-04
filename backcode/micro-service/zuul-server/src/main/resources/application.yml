@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://112.74.161.190:8000/eureka/
+server:
+  port: 8810
+spring:
+  application:
+    name: zuul-server
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: consumer
+    api-b:
+      path: /api-b/**
+      serviceId: consumer-second
+    api-c:
+      path: /api-c/**
+      serviceId: config-server

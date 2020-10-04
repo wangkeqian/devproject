@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id ="app">
+    <mycpn2></mycpn2>
+  </div>
+  <template id='code2'>
+    <div>
+      <h2>2.{{message}}</h2>
+      <h3>it's {{context}}</h3>
+      <h3>it's context2.2</h3>
+      <cpn1></cpn1>
+    </div>
+  </template>
+  <template id='code1'>
+    <div>
+      <h2>我是标题1</h2>
+      <h3>it's context1</h3>
+      <h3>it's context1.1</h3>
+    </div>
+  </template>
+</body>
+<script>
+
+   var vm = new Vue({
+    el: '#app',
+    data: {
+      message: 'nihao'
+    },
+    methods: {},
+    components: {
+        mycpn2: { 
+          template: '#code2',
+          data(){
+            return {message: 'hello world',context: 'jeck maras'}
+          },
+          components: {
+            cpn1: {
+              template: '#code1'
+            }
+          }
+    }
+    }
+   });
+</script>
+</html>

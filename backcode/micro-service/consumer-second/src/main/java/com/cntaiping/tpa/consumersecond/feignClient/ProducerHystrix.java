@@ -1,4 +1,4 @@
-package com.cntaiping.tpa.consumer.feignClient;
+package com.cntaiping.tpa.consumersecond.feignClient;
 
 import org.springframework.stereotype.Component;
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id ="app" > 
+        <h1>计算器:{{count}}</h1>
+        <button @click=add>+</button>
+        <button @click=sub>-</button>
+        <hr>
+        千米:<input type="text" v-model='kilometers' >
+        米: <input type="text" v-model='meters' >
+        <ul>
+            <li v-for="(m,index) in movies" :class='appcls(index)' @click=changeColor(index)>{{m}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            msg: '',
+            kilometers: 0,
+            meters: 0,
+            isActive: true,
+            isLine: true,
+            movies: ['星际穿越','ET','肖申克的救赎','夺冠','姜子牙'],
+            currentIndex: 0,
+            lists: [
+                {name:'jeck' ,age:13},
+                {name:'match',age:14},
+                {name:'wuyu', age:19}
+            ],
+            object: {
+                name: 'jane',
+                age: 22,
+                country: 'china'
+            }
+            
+            
+            
+        },
+        //响应式，只用请求一次，有缓存
+        //methods 每次刷新都要去计算，性能问题
+        computed: {
+            reversedMessage(){
+                return this.msg.split('').reverse().join('')
+            },
+            now(){
+                return Date.now();
+            }
+        },
+        methods: {
+            add(){
+                this.count = this.count + 1;
+            },
+            sub(){
+                this.count = this.count - 1;
+            },
+            nowa(){
+                this.nowDate = Date.now();
+            },
+            changeColor(index){
+                this.currentIndex = index;
+            },
+            appcls(idx){
+                return {active : idx === this.currentIndex, line : this.isLine};
+            }
+        },
+        watch: {
+            kilometers(val){
+                this.meters = val*1000;
+            },
+            meters(val){
+                this.kilometers = val/1000;
+            }
+        },
+     });
+     
+</script>
+</html>

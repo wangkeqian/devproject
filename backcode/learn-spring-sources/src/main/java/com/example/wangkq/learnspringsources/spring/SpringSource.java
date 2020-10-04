@@ -1,4 +1,4 @@
-package com.example.wangkq.learnspringsources;
+package com.example.wangkq.learnspringsources.spring;
 
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -13,6 +13,7 @@ import sun.rmi.rmic.iiop.ClassPathLoader;
 public class SpringSource {
     public static void main(String[] args) {
         XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("bean.xml"));
-        xmlBeanFactory.getBean()
+        User bean = xmlBeanFactory.getBean(User.class);
+
     }
 }

@@ -3,8 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
-import VueAxios from 'vue-axios'
-import $ from 'jquery'
+// import VueAxios from 'vue-axios'
+// import $ from 'jquery'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 Vue.prototype.$axios = axios;
@@ -12,7 +12,7 @@ Vue.prototype.$axios = axios;
 
 Vue.config.productionTip = false
 /* 解决跨域问题*/
-axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = 'api'
 
 
 /* eslint-disable no-new */

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父组件向子组件传递</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id ="app">
+    <cpn1  :title='title' :movies='movies'></cpn1>
+  </div>
+  <template id='cpn1'>
+    <div>
+      <h2>{{title}}</h2>
+      <h3 v-for='movie in movies'>{{movie}}</h3>
+    </div>
+  </template>
+</body>
+<script>
+  const cpn1 = {
+    template: '#cpn1',
+    // props: ['title','movies']
+    props: {
+      title: {
+        type: String,
+        default: 'movies list'
+      },
+      movies: {
+        type: Array,
+        default(){
+          return []
+        }
+      }
+    }
+  }
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      title: '电影列表',
+      movies: ['肖申克的救赎','星际穿越','当幸福来敲门','琉璃','蜘蛛侠','哪吒-魔童降世']
+    },
+    methods: {},
+    components: {
+      cpn1 : {
+        
+      }
+    }
+  });
+</script>
+</html>
