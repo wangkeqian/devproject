@@ -1,12 +1,14 @@
 //用到node系统模块 使用npm init 得到packgae.json
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HtmlWebpackPlugin  = require('html-webpack-plugin')
 module.exports ={
   entry: path.join(__dirname,'./src/main.js'),
   output: {
     path: path.join(__dirname,'dist'),
     filename: 'bundle.js',
-    publicPath: 'dist/'
+    // publicPath: 'dist/'
   },
   mode: 'development',
   module: {
@@ -17,6 +19,10 @@ module.exports ={
               { loader: "style-loader" },
               { loader: "css-loader" }
           ]
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
@@ -37,6 +43,13 @@ module.exports ={
   resolve: {
     alias: {
       'vue$':'vue/dist/vue.esm.js'
-    }
-  }
+    },
+    extensions: ['.js','.css','.vue']
+  },
+  plugins:[
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'index.html'
+    })
+  ]
 }
