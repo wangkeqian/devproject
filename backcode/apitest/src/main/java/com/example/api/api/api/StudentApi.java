@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONPath;
 import com.example.api.api.entity.Car;
+import com.example.api.api.entity.GoodsInfo;
+import com.example.api.api.utils.HtmlParseCrawler;
 import com.example.api.api.utils.RedisUtil;
 import io.lettuce.core.dynamic.annotation.Param;
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * TODO 请说明此类的作用
@@ -21,6 +24,7 @@ import java.util.*;
  * @date 2019/12/4
  */
 @RestController
+@CrossOrigin
 public class StudentApi {
     @Autowired
     private RedisUtil redisUtil;
@@ -51,4 +55,16 @@ public class StudentApi {
          redisUtil.hdel("car",id);
     }
 
+    @GetMapping("/crawler/{keys}")
+    public String crawlerPage(@PathVariable String keys){
+        Map<String, List> map = new HashMap<>();
+        List<GoodsInfo> collect = HtmlParseCrawler.parseJDLatch(keys)
+                .stream()
+                .filter(e -> Optional.ofNullable(e.getName())
+                        .isPresent() ).collect(Collectors.toList());
+
+        map.put(keys, collect);
+        redisUtil.hmset("GoodsInfo",map);
+        return "ok";
+    }
 }
