@@ -1,19 +1,13 @@
 package com.example.api.api.api;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.JSONPath;
 import com.example.api.api.entity.Car;
 import com.example.api.api.entity.GoodsInfo;
 import com.example.api.api.utils.HtmlParseCrawler;
 import com.example.api.api.utils.RedisUtil;
-import io.lettuce.core.dynamic.annotation.Param;
-import org.junit.Test;
+import com.example.api.api.utils.ReturnT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,11 +54,19 @@ public class StudentApi {
         Map<String, List> map = new HashMap<>();
         List<GoodsInfo> collect = HtmlParseCrawler.parseJDLatch(keys)
                 .stream()
-                .filter(e -> Optional.ofNullable(e.getName())
-                        .isPresent() ).collect(Collectors.toList());
-
+                .filter(e -> !e.getName().isEmpty() )
+                .collect(Collectors.toList());
         map.put(keys, collect);
         redisUtil.hmset("GoodsInfo",map);
         return "ok";
     }
+
+    @GetMapping("/category/search")
+    public ReturnT getCategoryData(String keys){
+
+        List<GoodsInfo> goodsInfo = (List<GoodsInfo>) redisUtil.hget("GoodsInfo", keys);
+
+        return new ReturnT(goodsInfo);
+    }
+
 }
