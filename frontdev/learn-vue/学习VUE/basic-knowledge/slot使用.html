@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id ="app">
+    <cpn1>
+      <h2>good</h2>
+    </cpn1>
+    <hr>
+    <!-- 目的是拿到子组件的数据 重新遍历 -->
+    <cpn1>
+      <div>你好</div>
+      <div>我好</div>
+      <div>他好</div>
+    </cpn1>
+    <cpn1></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      <slot></slot>
+    </div>
+  </template>
+</body>
+<script>
+  let vm = new Vue({
+    el: '#app',
+    data: {},
+    methods: {},
+    components: {
+      cpn1: {
+        template : '#cpn1',
+        data(){
+          return {
+            languages: ['Java','Javascript','Python','C++','C#','Go']
+          }
+        }
+      }
+    }
+  });
+</script>
+</html>
