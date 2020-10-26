@@ -1,14 +1,9 @@
 package com.qianma.community.common;
 
-import com.qianma.community.Model.User;
-import com.qianma.community.utils.SystemUtil;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 /**

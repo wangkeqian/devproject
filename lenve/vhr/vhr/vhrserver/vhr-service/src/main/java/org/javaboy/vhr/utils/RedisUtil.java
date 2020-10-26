@@ -96,9 +96,9 @@ public final class RedisUtil {
      * @param obj
      * @return
      */
-    public boolean set(String key ,Object obj){
+    public boolean set(Object key , Object obj){
         try {
-            redisTemplate.opsForValue().set(key, obj);
+            redisTemplate.opsForValue().set((String) key, obj);
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -113,9 +113,9 @@ public final class RedisUtil {
      * @param time  time 时间(秒) time要大于0 如果time小于等于0 将设置无限期
      * @return  T/F
      */
-    public boolean set(String key ,Object obj, long time){
+    public boolean set(Object key , Object obj, long time){
         try {
-            redisTemplate.opsForValue().set(key, obj, time);
+            redisTemplate.opsForValue().set((String) key, obj, time);
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -509,5 +509,9 @@ public final class RedisUtil {
             return 0;
         }
     }
+
+    public void set(Object k, Object v, int time) {
+    }
+
 
 }

@@ -42,6 +42,7 @@ public class StudentApi {
         carData.setId(UUID.randomUUID().toString());
         linkedHashMap.put(carData.getId(),carData);
         redisUtil.hmset("car",linkedHashMap);
+        
         return carData;
     }
     @DeleteMapping("/del/{id}")

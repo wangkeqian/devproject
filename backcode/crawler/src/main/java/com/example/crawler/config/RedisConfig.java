@@ -1,4 +1,4 @@
-package com.example.api.api.config;
+package com.example.crawler.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

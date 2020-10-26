@@ -1,0 +1,22 @@
+#app{
+  width: 300px;
+  border: 10px inset green;
+  padding: 25px;
+  margin: auto;
+  position: sticky;
+  top: 0;
+  z-index: -1;
+  background-color: red;
+  
+}
+span,input{
+  display: block;
+}
+ui{
+  height: 100px;
+  overflow-y: scroll;
+}
+div{
+  height: 100px;
+  overflow-y: scroll;
+}
